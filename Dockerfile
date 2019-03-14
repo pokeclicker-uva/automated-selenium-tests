@@ -7,10 +7,6 @@ ADD  target/selenium-docker.jar selenium-docker.jar
 ADD  target/selenium-docker-tests.jar selenium-docker-tests.jar
 ADD  target/libs libs
 
-# Add the suite xmls
-ADD order-module.xml order-module.xml
-ADD search-module.xml search-module.xml
-
 # Command line to execute the test
 # Expects below ennvironment variables
 # BROWSER = chrome / firefox
