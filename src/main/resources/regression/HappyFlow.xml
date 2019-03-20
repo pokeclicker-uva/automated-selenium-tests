@@ -1,0 +1,3 @@
+<scenario name="Happy Flow" package="com.example.googletest.tests" dataset="Global Testdata">
+    	<test class="GoogleZoeken"/>
+</scenario>
