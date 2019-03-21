@@ -7,12 +7,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.simonbaars.seleniumframework.core.SeleniumFramework;
 import com.simonbaars.seleniumframework.core.common.CSVUtils;
 import com.simonbaars.seleniumframework.core.common.ResourceCommons;
+import com.simonbaars.seleniumframework.core.common.TestingCommons;
 import com.simonbaars.seleniumframework.reporting.Logger;
 import com.simonbaars.seleniumframework.reporting.SeleniumTestcase;
 import com.simonbaars.seleniumframework.reporting.enums.LogLevel;
@@ -28,7 +36,7 @@ public class TestRunnerThread extends Thread {
 	public static TestRunnerThread thisInstance;
 	public static Testcase currentlyExecutingTestcase;
 	public static boolean stopped = false;
-	
+
 
 	public TestRunnerThread(JSONArray jsonArray, String testScenario) {
 		thisInstance = this;
@@ -91,9 +99,48 @@ public class TestRunnerThread extends Thread {
 	public Testcase[] getIncludedTests() {
 		return includedTests;
 	}
+	
+	private String parsePackageOrClass(Node scenario, boolean isClass) {
+		Node namedItem = isClass ? scenario.getAttributes().getNamedItem("class") : scenario.getAttributes().getNamedItem("package");
+		if(isClass)
+			return namedItem.getNodeValue();
+		else if(namedItem!=null)
+			return namedItem.getNodeValue() + ".";
+		return "";
+	}
 
 	@SuppressWarnings("unchecked")
 	public void setIncludedTests(JSONArray collect) {
+		if(collect == null) {
+			try {
+				File file = ResourceCommons.getResource("regression/"+scenario+".xml");
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+				dbf.setValidating(false);
+
+				dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+
+				DocumentBuilder dBuilder = dbf.newDocumentBuilder();
+				Document doc = dBuilder.parse(file);
+				JSONObject rootObj = new JSONObject();
+				Node scenario = doc.getElementsByTagName("scenario").item(0);
+					
+				NodeList childNodes = scenario.getChildNodes();
+				includedTests = new Testcase[childNodes.getLength()];
+				for(int i = 0; i<childNodes.getLength(); i++) {
+					JSONObject nodeObj = new JSONObject();
+					Node childNode = childNodes.item(i);
+							includedTests[i]=new Testcase(parsePackageOrClass(scenario, false) + parsePackageOrClass(childNode, true), childNode.getAttributes().getNamedItem("name").getNodeValue(), datasets);
+
+					if(childNode.getAttributes().getNamedItem("name")!=null) 
+						nodeObj.put("text", childNode.getAttributes().getNamedItem("name").getNodeValue());
+					else nodeObj.put("text", classNameToName(childNode.getAttributes().getNamedItem("class").getNodeValue()));
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		Testcase[] tests = new Testcase[collect.size()];
 		for(int i = 0; i<collect.size(); i++) {
 			JSONObject obj = (JSONObject)collect.get(i);

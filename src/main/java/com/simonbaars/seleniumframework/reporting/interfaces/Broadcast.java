@@ -60,6 +60,7 @@ public interface Broadcast {
 		for(int i = 0; i < output.size(); i++) {
 			try {
 				getOutputStreams().get(output.get(i)).write(data);
+				System.out.print((char)data);
 			} catch (IOException | NullPointerException e) {}
 		}
 	}

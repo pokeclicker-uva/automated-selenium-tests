@@ -9,10 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		LogLevel.setCurrentLogLevel(LogLevel.NOSCREENSHOTS);
-		JSONArray arr = new JSONArray();
-		arr.add("Login");
-		arr.add("Register");
-		new TestRunnerThread(arr, "HappyFlow");
+		new TestRunnerThread(null, "HappyFlow");
 	}
 
 }
