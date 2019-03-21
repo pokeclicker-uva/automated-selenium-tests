@@ -1,3 +1,4 @@
-<scenario name="Happy Flow" package="com.example.googletest.tests" dataset="Global Testdata">
-    	<test class="GoogleZoeken"/>
+<scenario name="Happy Flow" package="com.simonbaars.pokeclickertest.tests" dataset="Global Testdata">
+    	<test class="Login" dataset="LoginData"/>
+    	<test class="Register" dataset="RegistrationData"/>
 </scenario>
