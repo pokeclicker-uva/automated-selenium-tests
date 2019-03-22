@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 import com.simonbaars.seleniumframework.core.SeleniumFramework;
 import com.simonbaars.seleniumframework.core.common.CSVUtils;
 import com.simonbaars.seleniumframework.core.common.ResourceCommons;
+import com.simonbaars.seleniumframework.core.common.TestingCommons;
 import com.simonbaars.seleniumframework.reporting.Logger;
 import com.simonbaars.seleniumframework.reporting.SeleniumTestcase;
 import com.simonbaars.seleniumframework.reporting.enums.LogLevel;
@@ -115,7 +116,7 @@ public class TestRunnerThread extends Thread {
 	public void setIncludedTests(JSONArray collect) {
 		if(collect == null) {
 			try {
-				File file = ResourceCommons.getResource(scenario+".xml");
+				File file = TestingCommons.getResource(scenario+".xml");
 				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
 				dbf.setValidating(false);

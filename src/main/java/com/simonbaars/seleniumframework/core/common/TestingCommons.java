@@ -263,4 +263,8 @@ public class TestingCommons {
 			return OperatingSystem.MACOS;
 		return OperatingSystem.LINUX;
 	}
+
+	public static File getResource(String string) {
+		return new File(TestingCommons.class.getClassLoader().getResource(string).getFile());
+	}
 }
