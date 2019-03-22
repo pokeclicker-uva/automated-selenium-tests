@@ -137,7 +137,7 @@ public class TestRunnerThread extends Thread {
 						continue;
 					
 					String[] ds = childNode.getAttributes().getNamedItem("dataset")!=null ? new String[] {childNode.getAttributes().getNamedItem("dataset").getNodeValue()} : new String[0];
-					Arrays.stream(ds).filter(dataset -> !datasets.containsKey(dataset)).forEach(dataset -> datasets.put(dataset, CSVUtils.parseCSV(ResourceCommons.getResource("testdata"+File.separator+dataset+".csv"))));
+					Arrays.stream(ds).filter(dataset -> !datasets.containsKey(dataset)).forEach(dataset -> datasets.put(dataset, CSVUtils.parseCSV(TestingCommons.getResource("testdata"+File.separator+dataset+".csv"))));
 					includedTests[j]=new Testcase((SeleniumTestcase) Class.forName(parsePackageOrClass(scenario, false) + parsePackageOrClass(childNode, true)).newInstance(), childNode.getAttributes().getNamedItem("class").getNodeValue(), ds);
 					j++;
 				}
@@ -152,7 +152,7 @@ public class TestRunnerThread extends Thread {
 			JSONObject obj = (JSONObject)collect.get(i);
 			try {
 				String[] testdata = (String[])((JSONArray)obj.get("dataset")).toArray(new String[0]);
-				Arrays.stream(testdata).filter(dataset -> !datasets.containsKey(dataset)).forEach(dataset -> datasets.put(dataset, CSVUtils.parseCSV(ResourceCommons.getResource("testdata"+File.separator+dataset+".csv"))));
+				Arrays.stream(testdata).filter(dataset -> !datasets.containsKey(dataset)).forEach(dataset -> datasets.put(dataset, CSVUtils.parseCSV(TestingCommons.getResource("testdata"+File.separator+dataset+".csv"))));
 				tests[i] = new Testcase((SeleniumTestcase) Class.forName((String)obj.get("class")).newInstance(), (String)obj.get("name"), testdata, (List<Testgroup>)((JSONArray)obj.get("groups")).stream().map(e -> new Testgroup((String)((JSONObject)e).get("id"), (String)((JSONObject)e).get("name"))).collect(Collectors.toList()), (String)obj.get("id"));
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 				Logger.log("Could not load the testcase with class: "+obj.get("class"), e);

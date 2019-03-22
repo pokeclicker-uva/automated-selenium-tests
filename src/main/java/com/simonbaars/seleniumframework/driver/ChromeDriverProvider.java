@@ -103,7 +103,7 @@ public class ChromeDriverProvider {
 		HashMap<String, Object> chromePrefs = new HashMap<>();
 		chromePrefs.put("profile.default_content_settings.popups", 0);
 		chromePrefs.put("download.default_directory", SavePaths.getApplicationDataFolder() + "Downloads");
-		Map<String, String> perfLoggingPrefs = new HashMap<String, String>();
+		Map<String, String> perfLoggingPrefs = new HashMap<>();
 	    // Tracing categories, please note NO SPACE NEEDED after the commas
 	    perfLoggingPrefs.put("traceCategories", "blink.console,disabled-by-default-devtools.timeline");
 	    chromePrefs.put("perfLoggingPrefs", perfLoggingPrefs);
