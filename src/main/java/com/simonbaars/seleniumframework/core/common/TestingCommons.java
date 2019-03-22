@@ -72,32 +72,7 @@ public class TestingCommons {
 		if (file.createNewFile())
 			Files.write(Paths.get(file.getAbsolutePath()), content.getBytes(StandardCharsets.UTF_8));
 	}
-
-	/**
-	 * Returns the path of a given resource file. It is recommended to use this method as it will fix issues that could occur when a resource is accessed at android (for example when uploading a file).
-	 * @param filePath
-	 * @return
-	 */
-	public static String getResourceFilePath(String filePath) {
-		return getResourceFilePath(DriverProvider.getDriver(), filePath);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static String getResourceFilePath(WebDriver driver, String filePath) {
-		File file = new File(getLocalResource(filePath));
-		if (SeleniumType.getCurrentType() == SeleniumType.ANDROID) {
-			try {
-				String androidFilePath = "/data/local/tmp/" + file.getName();
-				((AndroidDriver<WebElement>) driver).pushFile(androidFilePath, loadFile(file));
-				return "//data//local//tmp//" + file.getName();
-			} catch (IOException e) {
-				Logger.log("The file for android could not be converted to Base64.", e);
-			}
-			return "";
-		}
-		return file.getAbsolutePath();
-	}
-
+	
 	/**
 	 * Returns a file from your application's resource folder.
 	 * @param filePath

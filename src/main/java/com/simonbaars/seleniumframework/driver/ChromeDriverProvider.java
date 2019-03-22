@@ -92,7 +92,7 @@ public class ChromeDriverProvider {
 		options.addArguments("start-maximized");
 		options.addArguments("disable-infobars");
 		options.addArguments("--disable-default-apps");
-		options.addArguments("--headless");
+		//options.addArguments("--headless");
 		options.addArguments("--window-size=1920,1080");
 		LoggingPreferences logPrefs = new LoggingPreferences();
 	    logPrefs.enable(LogType.PERFORMANCE, Level.INFO);

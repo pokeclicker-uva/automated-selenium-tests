@@ -12,8 +12,7 @@ import com.simonbaars.seleniumframework.reporting.Assert;
 
 @Page(name = "GameScreen", loadTimeout = 15)
 public class GameScreen extends PageObjectModel {
-	@Element(xpath = "//img[@alt=\"\"]", name = "Pokeball")
-
+	@Element(xpath = "//div[@class=\"Clicking\"]//img", name = "Pokeball")
 	WebElement pokeball;
 
 	@TestAction(name = "Check if pokeball is displayed")

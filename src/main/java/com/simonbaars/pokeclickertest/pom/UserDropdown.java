@@ -17,7 +17,6 @@ import org.openqa.selenium.interactions.Actions;
 @Page(name = "User dropdown", loadTimeout = 15)
 public class UserDropdown extends PageObjectModel {
 	@Element(xpath = "//li[text()=\"Logout\"]", name = "Logout button")
-
 	WebElement logoutButton;
 
 	@TestAction(name = "Click logout button")

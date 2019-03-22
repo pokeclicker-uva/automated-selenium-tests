@@ -15,13 +15,7 @@ import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 import com.simonbaars.seleniumframework.core.SeleniumType;
-import com.simonbaars.seleniumframework.driver.android.EnhancedAndroidDriver;
-import com.simonbaars.seleniumframework.driver.android.interfaces.CanQuitPartially;
 import com.simonbaars.seleniumframework.driver.browser.EnhancedChromeDriver;
 import com.simonbaars.seleniumframework.driver.exception.DriverException;
 import com.simonbaars.seleniumframework.driver.models.SeleniumDriver;
@@ -86,11 +80,7 @@ public class DriverProvider {
 		logger.log(Level.FINE, "Requesting driver for driverNumber {0}", driverNumber);
 		if (!webDriverPool.containsKey(driverNumber) || webDriverPool.get(driverNumber).getDriver() == null) {
 			logger.log(Level.INFO, "Creating a new driver for driverNumber {0}", driverNumber);
-			if (webDriverPool.containsKey(driverNumber)
-					&& webDriverPool.get(driverNumber).getType() == SeleniumType.ANDROID)
-				AndroidDriverProvider.createAndroidWebdriver(driverNumber,
-						webDriverPool.get(driverNumber).getApplication());
-			else if (!webDriverPool.containsKey(driverNumber)
+			if (!webDriverPool.containsKey(driverNumber)
 					|| webDriverPool.get(driverNumber).getType() == SeleniumType.BROWSER)
 				ChromeDriverProvider.createChromeWebdriver(webDriverPool, driverNumber);
 		}
@@ -117,10 +107,7 @@ public class DriverProvider {
 	public static void destroyDriver(int driverId, boolean doDestroy) {
 		if(!webDriverPool.containsKey(driverId))
 			return;
-		if (getDriver(driverId) instanceof CanQuitPartially)
-			((CanQuitPartially) getDriver(driverId)).quit(doDestroy);
-		else
-			getDriver(driverId).quit();
+		getDriver(driverId).quit();
 		webDriverPool.remove(driverId);
 	}
 
@@ -136,60 +123,6 @@ public class DriverProvider {
 		while (webDriverPool.containsKey(i))
 			i++;
 		return i;
-	}
-
-	/**
-	 * Creates an android driver if not yet available, then returns it.
-	 * @return the android driver
-	 */
-	@SuppressWarnings("unchecked")
-	public static AndroidDriver<AndroidElement> getAndroidDriver() {
-		if (SeleniumType.getCurrentType() != SeleniumType.ANDROID) {
-			loadDriver(SeleniumType.ANDROID);
-		}
-		return (AndroidDriver<AndroidElement>) getDriver();
-	}
-
-	@SuppressWarnings("unchecked")
-	public static AndroidDriver<AndroidElement> getAndroidDriver(int driverNumber) {
-		if (webDriverPool.get(driverNumber).getType() != SeleniumType.ANDROID) {
-			loadDriver(driverNumber, SeleniumType.ANDROID, null);
-		}
-		return (AndroidDriver<AndroidElement>) getDriver(driverNumber);
-	}
-
-	public static EnhancedAndroidDriver getEnhancedAndroidDriver() {
-		if (SeleniumType.getCurrentType() != SeleniumType.ANDROID) {
-			loadDriver(SeleniumType.ANDROID);
-		}
-		return (EnhancedAndroidDriver) getDriver();
-	}
-
-	public static EnhancedAndroidDriver getEnhancedAndroidDriver(int driverNumber) {
-		if (webDriverPool.get(driverNumber).getType() != SeleniumType.ANDROID) {
-			loadDriver(driverNumber, SeleniumType.ANDROID, null);
-		}
-		return (EnhancedAndroidDriver) getDriver(driverNumber);
-	}
-	
-	/**
-	 * Returns the webdriver casted as a mobile driver. If a mobile driver is not currently loaded the android driver will be loaded by default.
-	 * @return the android driver
-	 */
-	@SuppressWarnings("unchecked")
-	public static MobileDriver<MobileElement> getMobileDriver() {
-		if (!SeleniumType.isTestingOnMobile()) {
-			loadDriver(SeleniumType.ANDROID);
-		}
-		return (MobileDriver<MobileElement>) getDriver();
-	}
-
-	@SuppressWarnings("unchecked")
-	public static MobileDriver<MobileElement> getMobileDriver(int driverNumber) {
-		if (webDriverPool.get(driverNumber).getType() != SeleniumType.ANDROID) {
-			loadDriver(driverNumber, SeleniumType.ANDROID, null);
-		}
-		return (MobileDriver<MobileElement>) getDriver(driverNumber);
 	}
 	
 	@SuppressWarnings("unchecked")

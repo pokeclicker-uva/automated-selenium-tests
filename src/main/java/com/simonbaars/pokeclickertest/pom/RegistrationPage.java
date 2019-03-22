@@ -16,9 +16,11 @@ public class RegistrationPage extends PageObjectModel {
 	@Element(xpath = "//form[1]/p[1]//input[1]", name = "Username Inputfield")
 	@AlwaysOnPage
 	WebElement usernameInputfield;
+	
 	@Element(xpath = "//input[@name=\"email\"]", name = "Email Inputfield")
 	@AlwaysOnPage
 	WebElement emailInputfield;
+	
 	@Element(xpath = "//p[3]//input[1]", name = "Password Inputfield")
 	@AlwaysOnPage
 	WebElement passwordInputfield;

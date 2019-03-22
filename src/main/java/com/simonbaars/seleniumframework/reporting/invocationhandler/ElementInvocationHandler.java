@@ -18,7 +18,6 @@ import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 import com.simonbaars.seleniumframework.core.Wait;
 import com.simonbaars.seleniumframework.core.common.SeleniumCommons;
 import com.simonbaars.seleniumframework.core.common.TestingCommons;
-import com.simonbaars.seleniumframework.driver.android.NotFoundElement;
 import com.simonbaars.seleniumframework.reporting.annotations.Element;
 
 public class ElementInvocationHandler extends LocatingElementHandler {
@@ -51,7 +50,7 @@ public class ElementInvocationHandler extends LocatingElementHandler {
 			try {
 				elementObject = driver.findElement(By.xpath(xpath));
 			} catch (NoSuchElementException e) {
-				elementObject = new NotFoundElement(xpath);
+				throw e;
 			}
 		}
 		if(elementObject == null) elementObject = SeleniumCommons.foundElement;

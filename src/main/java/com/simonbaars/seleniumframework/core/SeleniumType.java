@@ -8,7 +8,7 @@ package com.simonbaars.seleniumframework.core;
 import com.simonbaars.seleniumframework.driver.DriverProvider;
 
 public enum SeleniumType {
-	BROWSER("browser", "getDriver"), ANDROID("android", "getEnhancedAndroidDriver");
+	BROWSER("browser", "getDriver");
 
 	private final String typeName;
 	private final String getter;
@@ -31,10 +31,6 @@ public enum SeleniumType {
 	@Override
 	public String toString() {
 		return typeName.substring(0, 1).toUpperCase() + typeName.substring(1);
-	}
-
-	public static boolean isTestingOnMobile() {
-		return getCurrentType() == ANDROID;
 	}
 
 	public static SeleniumType getTypeForName(String label) {

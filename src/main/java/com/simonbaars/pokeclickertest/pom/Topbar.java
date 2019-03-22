@@ -17,7 +17,6 @@ import org.openqa.selenium.interactions.Actions;
 @Page(name = "Topbar", loadTimeout = 15)
 public class Topbar extends PageObjectModel {
 	@Element(xpath = "//p[text()=\"simon4853102132019\"]", name = "Username button")
-
 	WebElement usernameButton;
 
 	@TestAction(name = "Click username button")

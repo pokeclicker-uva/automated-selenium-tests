@@ -40,8 +40,8 @@ public class TestRunnerThread extends Thread {
 
 	public TestRunnerThread(JSONArray jsonArray, String testScenario) {
 		thisInstance = this;
-		setIncludedTests(jsonArray);
 		this.scenario = testScenario;
+		setIncludedTests(jsonArray);
 		start();
 	}
 
@@ -51,7 +51,7 @@ public class TestRunnerThread extends Thread {
 			Testcase prevTest = null;
 			for(Testcase test : includedTests) {
 				currentlyExecutingTestcase = test;
-				registerLogger(prevTest, test);
+				//registerLogger(prevTest, test);
 				addAllTestdata(test);
 				SeleniumFramework.beforeTest(test);
 				test.getTest().run();
@@ -113,7 +113,7 @@ public class TestRunnerThread extends Thread {
 	public void setIncludedTests(JSONArray collect) {
 		if(collect == null) {
 			try {
-				File file = ResourceCommons.getResource("regression/"+scenario+".xml");
+				File file = ResourceCommons.getResource(scenario+".xml");
 				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
 				dbf.setValidating(false);
@@ -127,19 +127,22 @@ public class TestRunnerThread extends Thread {
 					
 				NodeList childNodes = scenario.getChildNodes();
 				includedTests = new Testcase[childNodes.getLength()];
-				for(int i = 0; i<childNodes.getLength(); i++) {
+				for(int i = 0, j=0; i<childNodes.getLength(); i++) {
 					JSONObject nodeObj = new JSONObject();
 					Node childNode = childNodes.item(i);
-							includedTests[i]=new Testcase(parsePackageOrClass(scenario, false) + parsePackageOrClass(childNode, true), childNode.getAttributes().getNamedItem("name").getNodeValue(), datasets);
-
-					if(childNode.getAttributes().getNamedItem("name")!=null) 
-						nodeObj.put("text", childNode.getAttributes().getNamedItem("name").getNodeValue());
-					else nodeObj.put("text", classNameToName(childNode.getAttributes().getNamedItem("class").getNodeValue()));
+					if(childNode.getAttributes() == null)
+						continue;
+					
+					String[] ds = childNode.getAttributes().getNamedItem("dataset")!=null ? new String[] {childNode.getAttributes().getNamedItem("dataset").getNodeValue()} : new String[0];
+					Arrays.stream(ds).filter(dataset -> !datasets.containsKey(dataset)).forEach(dataset -> datasets.put(dataset, CSVUtils.parseCSV(ResourceCommons.getResource("testdata"+File.separator+dataset+".csv"))));
+					includedTests[j]=new Testcase((SeleniumTestcase) Class.forName(parsePackageOrClass(scenario, false) + parsePackageOrClass(childNode, true)).newInstance(), childNode.getAttributes().getNamedItem("class").getNodeValue(), ds);
+					j++;
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return;
 		}
 		Testcase[] tests = new Testcase[collect.size()];
 		for(int i = 0; i<collect.size(); i++) {

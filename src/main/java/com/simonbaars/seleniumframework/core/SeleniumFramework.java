@@ -40,13 +40,6 @@ public class SeleniumFramework {
 	}
 	
 	/**
-	 * Execute the current test on an android device.
-	 */
-	public static void testOnAndroid() {
-		DriverProvider.loadDriver(SeleniumType.ANDROID);
-	}
-	
-	/**
 	 * Execute the current test on chrome (default).
 	 */
 	public static void testOnBrowser(){

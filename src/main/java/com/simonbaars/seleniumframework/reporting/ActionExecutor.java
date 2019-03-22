@@ -27,17 +27,17 @@ public class ActionExecutor {
 	public static void executeAction(TestAction testAction, Object proxy, Method method, Object[] args) {
 		while(TestRunnerThread.stopped) TestingCommons.sleep(100);
 		Testcase thisTestcase = TestRunnerThread.currentlyExecutingTestcase;
-		JavaScriptBridge.getInstance().addAction(TestRunnerThread.currentlyExecutingTestcase.getJstreeID(), testAction.name());
-		String thisId = (String) JSInvocationHandler.awaitResult();
-		LogType.registerOutputs(thisId);
-		LogType.takeScreenshot(LogLevel.ALWAYS, LogLevel.BEFORE);
+		//JavaScriptBridge.getInstance().addAction(TestRunnerThread.currentlyExecutingTestcase.getJstreeID(), testAction.name());
+		//String thisId = (String) JSInvocationHandler.awaitResult();
+		//LogType.registerOutputs(thisId);
+		//LogType.takeScreenshot(LogLevel.ALWAYS, LogLevel.BEFORE);
 		Logger.log("Executing action \""+testAction.name()+"\" in method "+method.getName()+" invoked with args "+Arrays.toString(args));
-		currentId = thisId;
+		//currentId = thisId;
 	}
 	
 	public static void afterExecution(TestAction testAction, Object proxy, Method method, Object[] args, Object retObj) {
 		Logger.log("Execution succeeded!");
-		LogType.takeScreenshot(LogLevel.ALWAYS, LogLevel.AFTER);
-		LogType.removeOutputs(currentId);
+		//LogType.takeScreenshot(LogLevel.ALWAYS, LogLevel.AFTER);
+		//LogType.removeOutputs(currentId);
 	}
 }

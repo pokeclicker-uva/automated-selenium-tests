@@ -15,6 +15,6 @@ import java.lang.annotation.Target;
 public @interface Element {
 	String name();
 	String xpath();
-	int waitTillExists() default 0;
+	int waitTillExists() default 15;
 	int waitTillClickable() default 0;
 }
