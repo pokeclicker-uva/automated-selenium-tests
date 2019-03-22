@@ -227,7 +227,10 @@ public class SeleniumCommons {
 
 	public static boolean elementExists(WebDriver driver, By by) {
 		try {
-			foundElement = driver.findElement(by);
+			List<WebElement> w = driver.findElements(by);
+			if(w.isEmpty())
+				return false;
+			foundElement = w.get(0);
 			return true;
 		} catch (Exception e) {
 			Logger.log("Exception thrown while checking element existance.", e);
@@ -240,7 +243,10 @@ public class SeleniumCommons {
 
 	public static boolean elementClickable(WebDriver driver, By by) {
 		try {
-			foundElement = driver.findElement(by);
+			List<WebElement> w = driver.findElements(by);
+			if(w.isEmpty())
+				return false;
+			foundElement = w.get(0);
 			return foundElement.isEnabled() && foundElement.isDisplayed();
 		} catch (Exception e) {
 			Logger.log("Exception thrown while checking element clickable.", e);

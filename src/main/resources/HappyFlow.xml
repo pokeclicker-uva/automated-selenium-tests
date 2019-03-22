@@ -1,4 +1,4 @@
 <scenario name="Happy Flow" package="com.simonbaars.pokeclickertest.tests" dataset="Global Testdata">
+		<test class="Register" dataset="RegistrationData"/>
     	<test class="Login" dataset="LoginData"/>
-    	<test class="Register" dataset="RegistrationData"/>
 </scenario>
