@@ -1,14 +1,12 @@
 package com.simonbaars.pokeclickertest.pom;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.simonbaars.seleniumframework.core.PageObjectModel;
-import com.simonbaars.seleniumframework.reporting.annotations.AlwaysOnPage;
 import com.simonbaars.seleniumframework.reporting.annotations.Element;
 import com.simonbaars.seleniumframework.reporting.annotations.Page;
 import com.simonbaars.seleniumframework.reporting.annotations.TestAction;
-
-import org.openqa.selenium.Keys;
 
 @Page(name = "LoginPage", loadTimeout = 15)
 public class LoginPage extends PageObjectModel {

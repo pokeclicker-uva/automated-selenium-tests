@@ -1,7 +1,5 @@
 package com.simonbaars.seleniumframework.reporting;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-
 import com.simonbaars.seleniumframework.reporting.enums.LogType;
 import com.simonbaars.seleniumframework.reporting.interfaces.Broadcast;
 

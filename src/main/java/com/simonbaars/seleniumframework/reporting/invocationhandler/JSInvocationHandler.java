@@ -7,12 +7,13 @@ package com.simonbaars.seleniumframework.reporting.invocationhandler;
 
 import java.lang.reflect.Method;
 
-import javafx.application.Platform;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
 import com.simonbaars.seleniumframework.core.PageObjectModel;
 import com.simonbaars.seleniumframework.core.common.TestingCommons;
 import com.simonbaars.seleniumframework.driver.exception.DriverException;
+
+import javafx.application.Platform;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
 public class JSInvocationHandler implements MethodInterceptor {
 	

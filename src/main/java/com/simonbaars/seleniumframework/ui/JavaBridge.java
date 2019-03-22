@@ -20,11 +20,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javafx.scene.web.WebEngine;
 import com.simonbaars.seleniumframework.core.common.ResourceCommons;
 import com.simonbaars.seleniumframework.reporting.enums.LogLevel;
 import com.simonbaars.seleniumframework.reporting.enums.LogType;
 import com.simonbaars.seleniumframework.ui.thread.TestRunnerThread;
+
+import javafx.scene.web.WebEngine;
 
 public class JavaBridge {
 	private final WebEngine webEngine;

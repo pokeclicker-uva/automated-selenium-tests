@@ -10,11 +10,7 @@ import java.util.Arrays;
 
 import com.simonbaars.seleniumframework.core.common.TestingCommons;
 import com.simonbaars.seleniumframework.reporting.annotations.TestAction;
-import com.simonbaars.seleniumframework.reporting.enums.LogLevel;
-import com.simonbaars.seleniumframework.reporting.enums.LogType;
-import com.simonbaars.seleniumframework.reporting.invocationhandler.JSInvocationHandler;
 import com.simonbaars.seleniumframework.reporting.types.Testcase;
-import com.simonbaars.seleniumframework.ui.JavaScriptBridge;
 import com.simonbaars.seleniumframework.ui.thread.TestRunnerThread;
 
 public class ActionExecutor {

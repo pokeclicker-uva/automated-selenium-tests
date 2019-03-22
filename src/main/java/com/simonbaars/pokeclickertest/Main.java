@@ -1,7 +1,5 @@
 package com.simonbaars.pokeclickertest;
 
-import org.json.simple.JSONArray;
-
 import com.simonbaars.seleniumframework.core.common.ResourceCommons;
 import com.simonbaars.seleniumframework.reporting.enums.LogLevel;
 import com.simonbaars.seleniumframework.ui.thread.TestRunnerThread;

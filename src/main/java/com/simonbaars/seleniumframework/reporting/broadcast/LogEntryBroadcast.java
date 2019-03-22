@@ -1,16 +1,8 @@
 package com.simonbaars.seleniumframework.reporting.broadcast;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.logging.LogEntries;
-import org.openqa.selenium.logging.LogEntry;
-
-import com.simonbaars.seleniumframework.core.common.TestingCommons;
-import com.simonbaars.seleniumframework.driver.DriverProvider;
 import com.simonbaars.seleniumframework.reporting.interfaces.Broadcast;
 
 public class LogEntryBroadcast extends BroadcastOutput implements Broadcast {

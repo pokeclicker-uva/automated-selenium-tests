@@ -5,6 +5,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import com.simonbaars.seleniumframework.core.SeleniumFramework;
+import com.simonbaars.seleniumframework.core.common.ResourceCommons;
+import com.simonbaars.seleniumframework.core.common.SavePaths;
+import com.simonbaars.seleniumframework.core.common.TestingCommons;
+import com.simonbaars.seleniumframework.driver.exception.DriverException;
+import com.simonbaars.seleniumframework.reporting.enums.LogLevel;
+import com.simonbaars.seleniumframework.ui.thread.TestRunnerThread;
 import com.sun.javafx.webkit.WebConsoleListener;
 
 import javafx.application.Application;
@@ -19,13 +26,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
-import com.simonbaars.seleniumframework.core.SeleniumFramework;
-import com.simonbaars.seleniumframework.core.common.ResourceCommons;
-import com.simonbaars.seleniumframework.core.common.SavePaths;
-import com.simonbaars.seleniumframework.core.common.TestingCommons;
-import com.simonbaars.seleniumframework.driver.exception.DriverException;
-import com.simonbaars.seleniumframework.reporting.enums.LogLevel;
-import com.simonbaars.seleniumframework.ui.thread.TestRunnerThread;
 
 public class Main extends Application {
 	private Scene scene;

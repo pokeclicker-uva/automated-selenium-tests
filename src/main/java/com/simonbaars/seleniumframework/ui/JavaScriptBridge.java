@@ -2,10 +2,11 @@ package com.simonbaars.seleniumframework.ui;
 
 import org.apache.commons.text.StringEscapeUtils;
 
-import net.sf.cglib.proxy.Enhancer;
 import com.simonbaars.seleniumframework.driver.exception.DriverException;
 import com.simonbaars.seleniumframework.reporting.enums.LogType;
 import com.simonbaars.seleniumframework.reporting.invocationhandler.JSInvocationHandler;
+
+import net.sf.cglib.proxy.Enhancer;
 
 /**
  * NOTHING IN THIS CLASS MAY RETURN NULL!!

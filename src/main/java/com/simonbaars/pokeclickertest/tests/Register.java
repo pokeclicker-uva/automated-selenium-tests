@@ -1,13 +1,13 @@
 package com.simonbaars.pokeclickertest.tests;
 
+import static com.simonbaars.seleniumframework.core.SeleniumType.BROWSER;
+
+import com.simonbaars.pokeclickertest.pom.GameScreen;
+import com.simonbaars.pokeclickertest.pom.RegistrationPage;
+import com.simonbaars.pokeclickertest.pom.Topbar;
+import com.simonbaars.pokeclickertest.pom.UserDropdown;
 import com.simonbaars.seleniumframework.reporting.SeleniumTestcase;
 import com.simonbaars.seleniumframework.reporting.annotations.UsesDriver;
-
-import static com.simonbaars.seleniumframework.core.SeleniumType.BROWSER;
-import com.simonbaars.pokeclickertest.pom.GameScreen;
-import com.simonbaars.pokeclickertest.pom.UserDropdown;
-import com.simonbaars.pokeclickertest.pom.Topbar;
-import com.simonbaars.pokeclickertest.pom.RegistrationPage;
 
 @UsesDriver(type = BROWSER, application = "http://pokeclicker.uva-se.nl/")
 public class Register extends SeleniumTestcase {

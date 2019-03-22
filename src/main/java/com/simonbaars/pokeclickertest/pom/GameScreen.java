@@ -3,12 +3,10 @@ package com.simonbaars.pokeclickertest.pom;
 import org.openqa.selenium.WebElement;
 
 import com.simonbaars.seleniumframework.core.PageObjectModel;
-import com.simonbaars.seleniumframework.reporting.annotations.AlwaysOnPage;
+import com.simonbaars.seleniumframework.reporting.Assert;
 import com.simonbaars.seleniumframework.reporting.annotations.Element;
 import com.simonbaars.seleniumframework.reporting.annotations.Page;
 import com.simonbaars.seleniumframework.reporting.annotations.TestAction;
-
-import com.simonbaars.seleniumframework.reporting.Assert;
 
 @Page(name = "GameScreen", loadTimeout = 15)
 public class GameScreen extends PageObjectModel {

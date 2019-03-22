@@ -13,13 +13,14 @@ import java.util.stream.Collectors;
 
 import org.openqa.selenium.WebDriver;
 
-import net.sf.cglib.proxy.Enhancer;
 import com.simonbaars.seleniumframework.core.PageObjectModel;
 import com.simonbaars.seleniumframework.core.SeleniumFramework;
 import com.simonbaars.seleniumframework.driver.DriverProvider;
 import com.simonbaars.seleniumframework.reporting.interfaces.Initializes;
 import com.simonbaars.seleniumframework.reporting.interfaces.Testdata;
 import com.simonbaars.seleniumframework.reporting.invocationhandler.ActionInvocationHandler;
+
+import net.sf.cglib.proxy.Enhancer;
 
 public abstract class SeleniumTestcase {
 	private static List<AssertionError> errors = new ArrayList<>();

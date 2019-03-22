@@ -26,13 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import io.appium.java_client.android.AndroidDriver;
-import com.simonbaars.seleniumframework.core.SeleniumType;
 import com.simonbaars.seleniumframework.core.enums.OperatingSystem;
-import com.simonbaars.seleniumframework.driver.DriverProvider;
 import com.simonbaars.seleniumframework.reporting.Assert;
 import com.simonbaars.seleniumframework.reporting.Logger;
 import com.simonbaars.seleniumframework.reporting.SeleniumTestcase;

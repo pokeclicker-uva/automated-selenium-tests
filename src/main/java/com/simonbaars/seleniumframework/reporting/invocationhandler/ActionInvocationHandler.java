@@ -7,13 +7,14 @@ package com.simonbaars.seleniumframework.reporting.invocationhandler;
 
 import java.lang.reflect.Method;
 
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
 import com.simonbaars.seleniumframework.core.PageObjectModel;
 import com.simonbaars.seleniumframework.driver.exception.DriverException;
 import com.simonbaars.seleniumframework.reporting.ActionExecutor;
 import com.simonbaars.seleniumframework.reporting.annotations.TestAction;
 import com.simonbaars.seleniumframework.reporting.interfaces.HasBeforeTestAction;
+
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
 public class ActionInvocationHandler implements MethodInterceptor {
 	

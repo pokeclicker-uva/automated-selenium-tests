@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,7 +19,6 @@ import org.w3c.dom.NodeList;
 import com.simonbaars.seleniumframework.core.SeleniumFramework;
 import com.simonbaars.seleniumframework.core.common.CSVUtils;
 import com.simonbaars.seleniumframework.core.common.ResourceCommons;
-import com.simonbaars.seleniumframework.core.common.TestingCommons;
 import com.simonbaars.seleniumframework.reporting.Logger;
 import com.simonbaars.seleniumframework.reporting.SeleniumTestcase;
 import com.simonbaars.seleniumframework.reporting.enums.LogLevel;
@@ -50,15 +48,17 @@ public class TestRunnerThread extends Thread {
 		try {
 			Testcase prevTest = null;
 			for(Testcase test : includedTests) {
-				currentlyExecutingTestcase = test;
-				//registerLogger(prevTest, test);
-				addAllTestdata(test);
-				SeleniumFramework.beforeTest(test);
-				test.getTest().run();
-				SeleniumFramework.afterTest(test);
-				SeleniumTestcase.getCurrentTestdata().clear();
-				LogType.removeOutputs(test.getJstreeID());
-				prevTest = test;
+				if(test!=null) {
+					currentlyExecutingTestcase = test;
+					//registerLogger(prevTest, test);
+					addAllTestdata(test);
+					SeleniumFramework.beforeTest(test);
+					test.getTest().run();
+					SeleniumFramework.afterTest(test);
+					SeleniumTestcase.getCurrentTestdata().clear();
+					LogType.removeOutputs(test.getJstreeID());
+					prevTest = test;
+				}
 			}
 			Logger.log("Finished execution of test scenario: "+scenario);
 		} catch (Exception e) {
@@ -72,10 +72,12 @@ public class TestRunnerThread extends Thread {
 
 	private void addAllTestdata(Testcase test) {
 		for(String dataset : test.getUsedDatasets()) {
-			List<String[]> list = datasets.get(dataset);
-			if (!list.isEmpty()) {
-				for (int i = 0; i < list.get(0).length; i++) {
-					SeleniumTestcase.getCurrentTestdata().put(list.get(0)[i], list.get(1)[i]);
+			if(datasets.containsKey(dataset)) {
+				List<String[]> list = datasets.get(dataset);
+				if (!list.isEmpty()) {
+					for (int i = 0; i < list.get(0).length; i++) {
+						SeleniumTestcase.getCurrentTestdata().put(list.get(0)[i], list.get(1)[i]);
+					}
 				}
 			}
 		}
